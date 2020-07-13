@@ -13,7 +13,7 @@ def store(request):
           cartItems = order.get_cart_items
      else:
           items = []
-          order = {'get_cart_total':0, 'get_cart_item':0}
+          order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
           cartItems = order['get_cart_items']
 
 
@@ -29,11 +29,9 @@ def cart(request):
           items = order.orderitem_set.all()
           cartItems = order.get_cart_items
 
-          
-          
      else:
           items = []
-          order = {'get_cart_total':0, 'get_cart_item':0, 'shipping':False}
+          order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
           cartItems = order['get_cart_items']
 
 
@@ -47,12 +45,10 @@ def checkout(request):
           items = order.orderitem_set.all()
           cartItems = order.get_cart_items
 
-          
      else:
           items = []
-          order = {'get_cart_total':0, 'get_cart_item':0, 'shipping':False}
-          cartItems = order['get_cart_items', 'cartItems': cartItems]
-
+          order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+          cartItems = order['get_cart_items']
 
 
      context = {'items': items, 'order':order, 'cartItems': cartItems}
@@ -110,7 +106,6 @@ def processOrder(request):
 		city=data['shipping']['city'],
 		state=data['shipping']['state'],
 		zipcode=data['shipping']['zipcode'],
-               
           )
 
      return JsonResponse("payment complete", safe=False)
